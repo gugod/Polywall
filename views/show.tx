@@ -1,0 +1,18 @@
+<p><a href="/posts/new">Create New Post</a></p>
+
+<div id="posts">
+    : for $posts -> $post {
+    <article>
+        <p><: $post.content :></p>
+    </article>
+    : }
+</div>
+<hr>
+<p><a href="/stickies/new">Create New Sticky</a></p>
+<div id="stickies">
+    : for $stickies -> $sticky {
+    <article>
+        <p><: $sticky.content :></p>
+    </article>
+    : }
+</div>

@@ -6,6 +6,7 @@ use Encode qw(encode_utf8);
 use DateTime;
 use MongoDB;
 use URI;
+use Text::Xslate;
 
 {
     my $mdb;
@@ -16,6 +17,16 @@ use URI;
 
     sub Post()   { __mongodb->posts }
     sub Sticky() { __mongodb->stickies }
+}
+
+{
+    my $tx = Text::Xslate->new(path => ['views']);
+    sub render {
+        my ($template, $var) = @args;
+
+        $var->{content} = $tx->render($template, $var);
+        $self->print( $tx->render("layout.tx", $var) );
+    }
 }
 
 sub dispatch {
@@ -39,37 +50,38 @@ sub show {
     my @posts    = Post->find->sort({   created_at => -1 })->limit(10)->all;
     my @stickies = Sticky->find->sort({ created_at => -1 })->all;
 
-    $self->print(q{<p><a href="/posts/new">Create New Post</a></p>});
-    $self->print(qq{<div id="posts">});
-    for (@posts) {
-        next unless $_->{content};
-        my $c = encode_utf8( $_->{content} );
-        $self->print(qq{<article><p>$c</p></article>});
-    }
-    $self->print(qq{</div>});
+    @posts = map {
+        $_->{content} = encode_utf8($_->{content});
+        $_;
+    } grep { $_->{content} }@posts;
 
-    $self->print(qq{<hr>});
-    $self->print(q{<p><a href="/stickies/new">Create New Sticky</a></p>});
-    $self->print(qq{<div id="stickies">});
-    for (@stickies) {
-        next unless $_->{content};
-        my $c = encode_utf8( $_->{content} );
-        $self->print(qq{<article><p>$c</p></article>});
-    }
-    $self->print(qq{</div>});
+    @stickies = map {
+        $_->{content} = encode_utf8($_->{content});
+        $_;
+    } grep { $_->{content} }@stickies;
+
+    render(
+        $self,
+        "show.tx",
+        {
+            posts => \@posts,
+            stickies => \@stickies
+        }
+    );
 }
 
 sub to_create_posts {
     my $content = $self->param('post.content');
 
     while(!$content) {
-        $self->print(q{<form><input type="text" name="post.content"><input type="submit"></form>});
+        render($self, "posts/new.tx");
         $self->next;
         $content = $self->param('post.content');
     }
 
     Post->insert({ content => $content, created_at => DateTime->now });
-    $self->print(q{<p>Done !</p><p><a href="/">Back to homepage.</a></p>});
+
+    render($self, "posts/created.tx");
 }
 
 sub to_create_stickies {
