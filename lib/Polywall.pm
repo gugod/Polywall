@@ -1,4 +1,3 @@
-#!/usr/bin/env perl
 use 5.012;
 
 package Polywall 1.0;
@@ -87,12 +86,4 @@ sub to_create_stickies {
     $self->print(q{<p>Done !</p><p><a href="/">Back to homepage.</a></p>});
 }
 
-package main;
-use Continuity;
-use Continuity::Adapt::PSGI;
-
-Continuity->new(
-    adapter => Continuity::Adapt::PSGI->new,
-    cookie_session => 'polywall_session',
-    callback => \&Polywall::dispatch
-)->loop;
+1;
