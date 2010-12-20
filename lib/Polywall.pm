@@ -1,6 +1,7 @@
 use 5.012;
 
 package Polywall 1.0;
+use parent qw(Continuity::RequestHolder);
 use self 0.32;
 use Encode qw(encode_utf8);
 use DateTime;
@@ -32,16 +33,18 @@ use Text::Xslate;
 sub dispatch {
     my $uri = URI->new($self->request->uri);
 
+    $self = bless $self, 'Polywall';
+
     given ($uri->path) {
         when ('/') {
-            show($self);
+            $self->show;
         }
         when ('/posts/new') {
-            to_create_posts($self);
+            $self->to_create_posts;
         }
 
         when ('/stickies/new') {
-            to_create_stickies($self);
+            $self->to_create_stickies;
         }
     }
 }
@@ -60,8 +63,7 @@ sub show {
         $_;
     } grep { $_->{content} }@stickies;
 
-    render(
-        $self,
+    $self->render(
         "show.tx",
         {
             posts => \@posts,
@@ -74,28 +76,28 @@ sub to_create_posts {
     my $content = $self->param('post.content');
 
     while(!$content) {
-        render($self, "posts/new.tx");
+        $self->render("posts/new.tx");
         $self->next;
         $content = $self->param('post.content');
     }
 
     Post->insert({ content => $content, created_at => DateTime->now });
 
-    render($self, "posts/created.tx");
+    $self->render("posts/created.tx");
 }
 
 sub to_create_stickies {
     my $content = $self->param('sticky.content');
 
     while(!$content) {
-        render($self, "stickies/new.tx");
+        $self->render("stickies/new.tx");
         $self->next;
         $content = $self->param('sticky.content');
     }
 
     Sticky->insert({ content => $content, created_at => DateTime->now });
 
-    render($self, "stickies/created.tx");
+    $self->render("stickies/created.tx");
 }
 
 1;
