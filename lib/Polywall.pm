@@ -88,14 +88,14 @@ sub to_create_stickies {
     my $content = $self->param('sticky.content');
 
     while(!$content) {
-        $self->print(q{<form><input type="text" name="sticky.content"><input type="submit"></form>});
+        render($self, "stickies/new.tx");
         $self->next;
         $content = $self->param('sticky.content');
     }
 
     Sticky->insert({ content => $content, created_at => DateTime->now });
 
-    $self->print(q{<p>Done !</p><p><a href="/">Back to homepage.</a></p>});
+    render($self, "stickies/created.tx");
 }
 
 1;
