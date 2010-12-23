@@ -1,4 +1,6 @@
 <div id="content">
-    <form><input type="text" name="post.content"><input type="submit"></form>
+    <form>
+        <textarea name="post.content" class="huge"></textarea>
+        <p><input type="submit"></p>
+    </form>
 </div>
-

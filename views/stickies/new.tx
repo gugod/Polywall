@@ -1,4 +1,7 @@
 <div id="content">
-<form><input type="text" name="sticky.content"><input type="submit"></form>
+    <form>
+        <textarea name="sticky.content"></textarea>
+        <p><input type="submit"></p>
+    </form>
 </div>
 

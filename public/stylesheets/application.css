@@ -1231,3 +1231,9 @@ body form.inline p {
 #button-to-create-new-stickies[type] {
   padding: 4px 10px 3px 7px;
 }
+
+/* line 60, ../sass/application.scss */
+body textarea.huge {
+  width: 99%;
+  height: 500px;
+}

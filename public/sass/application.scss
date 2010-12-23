@@ -56,3 +56,8 @@ body {
 #button-to-create-new-stickies {
     @include button-button;
 }
+
+body textarea.huge {
+    width: 99%;
+    height: 500px;
+}
