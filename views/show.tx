@@ -1,6 +1,4 @@
 <div id="content">
-    <p><a href="/posts/new" id="button-to-create-new-posts">Create New Post</a></p>
-
     <div id="posts">
         : for $posts -> $post {
         <article>
@@ -11,7 +9,6 @@
 </div>
 
 <div id="sidebar">
-    <p><a href="/stickies/new" id="button-to-create-new-stickies">Create New Sticky</a></p>
     <div id="stickies">
         : for $stickies -> $sticky {
         <article>

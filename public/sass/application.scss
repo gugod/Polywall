@@ -22,7 +22,7 @@ body {
     margin: 10px 0 0 50px;
 }
 
-#header, #footer {
+#header {
     @include column(24);
 }
 
@@ -38,8 +38,8 @@ body {
 #sidebar {
     width: 230px;
     position: fixed;
-    top:  70px;
-    left: 770px;
+    top:  100px;
+    right: 50px;
 }    
 
 #stickies {

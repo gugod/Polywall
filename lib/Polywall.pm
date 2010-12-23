@@ -31,7 +31,7 @@ sub render {
 
 
 sub show() {
-    my @posts    = Post->find->sort({   created_at => -1 })->all;
+    my @posts    = Post->find->sort({   created_at => -1 })->limit(25)->all;
     my @stickies = Sticky->find->sort({ created_at => -1 })->all;
 
     @posts = map {

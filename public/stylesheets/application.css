@@ -1136,14 +1136,14 @@ body form.inline p {
 }
 
 /* line 25, ../sass/application.scss */
-#header, #footer {
+#header {
   display: inline;
   float: left;
   margin-right: 10px;
   width: 950px;
 }
 /* line 138, ../../../../../../usr/local/Cellar/ruby-enterprise-edition/2010.02/lib/ruby/gems/1.8/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
-* html #header, * html #footer {
+* html #header {
   overflow-x: hidden;
 }
 
@@ -1168,8 +1168,8 @@ body form.inline p {
 #sidebar {
   width: 230px;
   position: fixed;
-  top: 70px;
-  left: 770px;
+  top: 100px;
+  right: 50px;
 }
 
 /* line 46, ../sass/application.scss */
