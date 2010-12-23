@@ -23,7 +23,7 @@ use self::implicit;
 
 sub render {
     my ($template, $var) = @args;
-    my $tx = Text::Xslate->new(path => ['views'], cache => 1, cache_dir => __FILE__ . "/../tmp/xslate_cache");
+    my $tx = Text::Xslate->new(path => ['views'], cache => 1, cache_dir => "/tmp/polywall_xslate_cache");
 
     $var->{content} = $tx->render($template, $var);
     $self->print( $tx->render("layout.tx", $var) );
