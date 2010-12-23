@@ -21,18 +21,17 @@ use Text::Xslate;
 
 use self::implicit;
 
-{
-    my $tx = Text::Xslate->new(path => ['views']);
-    sub render {
-        my ($template, $var) = @args;
+sub render {
+    my ($template, $var) = @args;
+    my $tx = Text::Xslate->new(path => ['views'], cache => 1, cache_dir => __FILE__ . "/../tmp/xslate_cache");
 
-        $var->{content} = $tx->render($template, $var);
-        $self->print( $tx->render("layout.tx", $var) );
-    }
+    $var->{content} = $tx->render($template, $var);
+    $self->print( $tx->render("layout.tx", $var) );
 }
 
+
 sub show() {
-    my @posts    = Post->find->sort({   created_at => -1 })->limit(10)->all;
+    my @posts    = Post->find->sort({   created_at => -1 })->all;
     my @stickies = Sticky->find->sort({ created_at => -1 })->all;
 
     @posts = map {
