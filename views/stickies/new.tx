@@ -1,1 +1,4 @@
+<div id="content">
 <form><input type="text" name="sticky.content"><input type="submit"></form>
+</div>
+

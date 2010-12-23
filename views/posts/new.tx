@@ -1,1 +1,4 @@
-<form><input type="text" name="post.content"><input type="submit"></form>
+<div id="content">
+    <form><input type="text" name="post.content"><input type="submit"></form>
+</div>
+

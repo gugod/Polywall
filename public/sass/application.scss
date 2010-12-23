@@ -1,0 +1,58 @@
+$blueprint-grid-columns : 24;
+$blueprint-grid-width   : 30px;
+$blueprint-grid-margin  : 10px;
+$font-color             : #333;
+
+@import "compass/reset";
+@import "compass/utilities";
+@import "compass/css3/box-shadow";
+@import "blueprint";
+@import "blueprint/fancy_type";
+@import "blueprint/scaffolding";
+@import "blueprint/buttons";
+
+body {
+    @include fancy-type;
+    @include blueprint;
+    @include blueprint-scaffolding;
+}
+
+#wrapper {
+    @include container;
+    margin: 10px 0 0 50px;
+}
+
+#header, #footer {
+    @include column(24);
+}
+
+#content {
+    @include column(18);
+
+    article {
+        margin: 1em 0;
+        border-bottom: 1px dotted #ccc;
+    }
+}
+
+#sidebar {
+    width: 230px;
+    position: fixed;
+    top:  70px;
+    left: 770px;
+}    
+
+#stickies {
+    article {
+        background: #ffc;
+        margin: 1em 0;
+        padding: 0.5em;
+        border-radius: 0.25em;
+        @include box-shadow;
+    }
+}
+
+#button-to-create-new-posts,
+#button-to-create-new-stickies {
+    @include button-button;
+}

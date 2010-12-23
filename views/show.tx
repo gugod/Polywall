@@ -1,18 +1,22 @@
-<p><a href="/posts/new">Create New Post</a></p>
+<div id="content">
+    <p><a href="/posts/new" id="button-to-create-new-posts">Create New Post</a></p>
 
-<div id="posts">
-    : for $posts -> $post {
-    <article>
-        <p><: $post.content :></p>
-    </article>
-    : }
+    <div id="posts">
+        : for $posts -> $post {
+        <article>
+            <p><: $post.content :></p>
+        </article>
+        : }
+    </div>
 </div>
-<hr>
-<p><a href="/stickies/new">Create New Sticky</a></p>
-<div id="stickies">
-    : for $stickies -> $sticky {
-    <article>
-        <p><: $sticky.content :></p>
-    </article>
-    : }
+
+<div id="sidebar">
+    <p><a href="/stickies/new" id="button-to-create-new-stickies">Create New Sticky</a></p>
+    <div id="stickies">
+        : for $stickies -> $sticky {
+        <article>
+            <p><: $sticky.content :></p>
+        </article>
+        : }
+    </div>
 </div>
