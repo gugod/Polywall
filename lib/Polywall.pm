@@ -80,6 +80,14 @@ sub to_create_stickies() {
     render("stickies/created.tx");
 }
 
+sub to_show_post($) {
+    my ($post_id) = @args;
+    my $post = Post->find_one({ _id => MongoDB::OID->new(value => $post_id) });
+    $post->{content} = encode_utf8($post->{content});
+
+    render("posts/show.tx", { post => $post });
+}
+
 no self::implicit;
 
 sub dispatch {
@@ -92,12 +100,17 @@ sub dispatch {
         when ('/') {
             show;
         }
+
         when ('/posts/new') {
             to_create_posts;
         }
 
         when ('/stickies/new') {
             to_create_stickies;
+        }
+
+        when ( /^\/posts\/([0-9a-z]{24})$/ ) {
+            to_show_post($1);
         }
     }
 }
