@@ -1,4 +1,9 @@
-<nav><a href="/posts/new" id="button-to-create-new-posts">Create New Post</a> <a href="/stickies/new" id="button-to-create-new-stickies">Create New Sticky</a></nav>
+<nav>
+    <a href="/posts/new" id="button-to-create-new-posts">Create New Post</a>
+    : if $stickies.size() < 5 {
+    <a href="/stickies/new" id="button-to-create-new-stickies">Create New Sticky</a>
+    : }
+</nav>
 
 <div id="content">
     <div id="posts">
