@@ -1,5 +1,5 @@
 <div id="content">
-    <form>
+    <form method="post">
         <textarea name="post.content" class="huge" autofocus></textarea>
         <p><input type="submit"></p>
     </form>
