@@ -29,10 +29,11 @@ sub render {
     $self->print( $tx->render("layout.tx", $var) );
 }
 
-
 sub show() {
     my @posts    = Post->find->sort({   created_at => -1 })->limit(25)->all;
-    my @stickies = Sticky->find->sort({ created_at => -1 })->all;
+    my @stickies = Sticky->find({
+        "created_at" => { '$gte' => DateTime->now->subtract(hours => 24) }
+    })->sort({ created_at => -1 })->all;
 
     @posts = map {
         $_->{content} = encode_utf8($_->{content});
