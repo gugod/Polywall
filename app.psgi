@@ -9,6 +9,7 @@ use Continuity::Adapt::PSGI;
 Continuity->new(
     adapter => Continuity::Adapt::PSGI->new,
     cookie_session => 'polywall_session',
+    path_session => 1,
     callback => \&Polywall::dispatch
 )->loop;
 
