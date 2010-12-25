@@ -7,7 +7,7 @@ $font-color             : #333;
 @import "compass/utilities";
 @import "compass/css3/box-shadow";
 @import "blueprint";
-@import "blueprint/fancy_type";
+@import "blueprint/fancy-type";
 @import "blueprint/scaffolding";
 @import "blueprint/buttons";
 
@@ -17,17 +17,29 @@ body {
     @include blueprint-scaffolding;
 }
 
+nav {
+    position: fixed;
+    top: 10px;
+    left: 16em;
+}
+
 #wrapper {
     @include container;
     margin: 10px 0 0 50px;
 }
 
 #header {
-    @include column(24);
+    width: 950px;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 50px;
+    padding-top: 10px;
 }
 
 #content {
     @include column(18);
+    margin-top: 73px;
 
     article {
         margin: 1em 0;
@@ -38,7 +50,7 @@ body {
 #sidebar {
     width: 230px;
     position: fixed;
-    top:  100px;
+    top:  73px;
     right: 50px;
 }    
 
