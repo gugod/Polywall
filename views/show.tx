@@ -9,20 +9,16 @@
     <div id="posts">
         : for $posts -> $post {
         <article>
-            <p><: $post.content | summerize :></p>
-            
-            <a class="permalink" href="/posts/<: $post._id :>">
-                Written on <time datetime="<: $post.created_at :>">on <: $post.created_at.strftime('%A, %F, %R') :></time>
-            </a>
+            <: $post.content | summerize :>
+            <a class="permalink" href="/posts/<: $post._id :>" title="<: $post.created_at.strftime('%F %T') :>">written on <time datetime="<: $post.created_at :>">on <: $post.created_at.strftime('%A, %I:%M%P') :></time></a>
         </article>
         : }
     </div>
 </div>
 
-<div id="sidebar">
-    <div id="stickies">
-        : for $stickies -> $sticky {
-        <article><: $sticky.content :></article>
-        : }
-    </div>
+<div id="stickies">
+    : for $stickies -> $sticky {
+    <article><: $sticky.content :></article>
+    : }
 </div>
+

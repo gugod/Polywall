@@ -1291,43 +1291,45 @@ nav {
 
 /* line 41, ../sass/application.scss */
 #content {
-  display: inline;
-  float: left;
-  margin-right: 10px;
   width: 710px;
-  margin-top: 73px;
-}
-/* line 138, ../../../../../../usr/local/Cellar/ruby-enterprise-edition/2010.02/lib/ruby/gems/1.8/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
-* html #content {
-  overflow-x: hidden;
+  margin-top: 75px;
 }
 /* line 45, ../sass/application.scss */
 #content article {
-  margin: 1em 0;
-  border-bottom: 1px dotted #ccc;
+  margin-bottom: 1.5em;
+  outline-bottom: 1px dotted #ccc;
+}
+/* line 49, ../sass/application.scss */
+#content article .permalink {
+  color: #ccc;
+}
+/* line 52, ../sass/application.scss */
+#content article .permalink:hover {
+  color: #777;
+  text-decoration: underline;
 }
 
-/* line 51, ../sass/application.scss */
-#sidebar {
-  width: 240px;
+/* line 60, ../sass/application.scss */
+#stickies {
+  width: 260px;
   position: fixed;
-  top: 73px;
+  top: 85px;
   right: 50px;
+  margin-top: -0.5em;
 }
-
-/* line 59, ../sass/application.scss */
+/* line 67, ../sass/application.scss */
 #stickies article {
   background: #ffc;
-  margin: 1em 0;
-  padding: 0.5em;
   border-radius: 0.25em;
+  padding: 0.5em;
+  margin-bottom: 0.5em;
   -moz-box-shadow: #333333 1px 1px 5px 0;
   -webkit-box-shadow: #333333 1px 1px 5px 0;
   -o-box-shadow: #333333 1px 1px 5px 0;
   box-shadow: #333333 1px 1px 5px 0;
 }
 
-/* line 69, ../sass/application.scss */
+/* line 77, ../sass/application.scss */
 #button-to-create-new-posts,
 #button-to-create-new-stickies {
   display: -moz-inline-box;
@@ -1375,7 +1377,7 @@ nav {
   padding: 4px 10px 3px 7px;
 }
 
-/* line 73, ../sass/application.scss */
+/* line 81, ../sass/application.scss */
 body textarea.huge {
   width: 99%;
   height: 500px;

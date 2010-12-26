@@ -39,28 +39,36 @@ nav {
 }
 
 #content {
-    @include column(18);
-    margin-top: 73px;
+    width: 710px;
+    margin-top: 75px;
 
     article {
-        margin: 1em 0;
-        border-bottom: 1px dotted #ccc;
+        margin-bottom: 1.5em;
+        outline-bottom: 1px dotted #ccc;
+
+        .permalink {
+            color: #ccc;
+
+            &:hover {
+                color: #777;
+                text-decoration: underline;
+            }
+        }
     }
 }
 
-#sidebar {
-    width: 240px;
-    position: fixed;
-    top:  73px;
-    right: 50px;
-}    
-
 #stickies {
+    width: 260px;
+    position: fixed;
+    top:  85px;
+    right: 50px;
+    margin-top: -0.5em;
+
     article {
         background: #ffc;
-        margin: 1em 0;
-        padding: 0.5em;
         border-radius: 0.25em;
+        padding: 0.5em;
+        margin-bottom: 0.5em;
         @include box-shadow;
     }
 }
