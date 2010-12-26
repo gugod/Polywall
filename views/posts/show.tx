@@ -1,3 +1,5 @@
 <div id="content">
+    <p><time datetime="<: $post.created_at :>">Posted At: <: $post.created_at.strftime('%F %I:%M %P') :></time></p>
+
     <: $post.content :>
 </div>
