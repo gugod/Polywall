@@ -1,6 +1,8 @@
-use 5.012;
+package Polywall;
+use strict;
+use feature qw(switch);
 
-package Polywall 1.0;
+
 use parent qw(Continuity::RequestHolder);
 use Encode qw(encode_utf8 decode_utf8);
 use DateTime;
