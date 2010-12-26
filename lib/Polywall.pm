@@ -20,22 +20,28 @@ use String::Truncate ();
     sub Sticky() { __mongodb->stickies }
 }
 
+{
+    my $tx;
+    sub __xslate {
+        my $tx = Text::Xslate->new(
+            path => ['views'], cache => 1, cache_dir => "/tmp/polywall_xslate_cache",
+            function => {
+                summerize => sub {
+                    my ($text) = @_;
+                    return encode_utf8( String::Truncate::elide( decode_utf8($text), 280));
+                }
+            }
+        );
+
+        return $tx;
+    }
+}
 use self::implicit;
 
 sub render {
     my ($template, $var) = @args;
-    my $tx = Text::Xslate->new(
-        path => ['views'], cache => 1, cache_dir => "/tmp/polywall_xslate_cache",
-        function => {
-            summerize => sub {
-                my ($text) = @_;
-                return encode_utf8( String::Truncate::elide( decode_utf8($text), 280));
-            }
-        }
-    );
-
-    $var->{content} = $tx->render($template, $var);
-    $self->print( $tx->render("layout.tx", $var) );
+    $var->{content} = __xslate->render($template, $var);
+    $self->print( __xslate->render("layout.tx", $var) );
 }
 
 sub show() {
