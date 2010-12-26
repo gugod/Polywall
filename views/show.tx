@@ -9,10 +9,11 @@
     <div id="posts">
         : for $posts -> $post {
         <article>
-            <p><: $post.content :></p>
-            <p>
-                <a href="/posts/<: $post._id :>">permalink</a>
-            </p>
+            <p><: $post.content | summerize :></p>
+            
+            <a class="permalink" href="/posts/<: $post._id :>">
+                Written on <time datetime="<: $post.created_at :>">on <: $post.created_at.strftime('%A, %F, %R') :></time>
+            </a>
         </article>
         : }
     </div>
@@ -21,9 +22,7 @@
 <div id="sidebar">
     <div id="stickies">
         : for $stickies -> $sticky {
-        <article>
-            <p><: $sticky.content :></p>
-        </article>
+        <article><: $sticky.content :></article>
         : }
     </div>
 </div>

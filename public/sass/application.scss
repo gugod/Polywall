@@ -1,6 +1,7 @@
 $blueprint-grid-columns : 24;
 $blueprint-grid-width   : 30px;
 $blueprint-grid-margin  : 10px;
+$blueprint-font-size    : 16px;
 $font-color             : #333;
 
 @import "compass/reset";
@@ -8,19 +9,19 @@ $font-color             : #333;
 @import "compass/css3/box-shadow";
 @import "blueprint";
 @import "blueprint/fancy-type";
-@import "blueprint/scaffolding";
 @import "blueprint/buttons";
+
+@include blueprint;
+
 
 body {
     @include fancy-type;
-    @include blueprint;
-    @include blueprint-scaffolding;
 }
 
 nav {
     position: fixed;
     top: 10px;
-    left: 16em;
+    left: 18em;
 }
 
 #wrapper {
@@ -48,7 +49,7 @@ nav {
 }
 
 #sidebar {
-    width: 230px;
+    width: 240px;
     position: fixed;
     top:  73px;
     right: 50px;

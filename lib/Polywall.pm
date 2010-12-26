@@ -2,11 +2,12 @@ use 5.012;
 
 package Polywall 1.0;
 use parent qw(Continuity::RequestHolder);
-use Encode qw(encode_utf8);
+use Encode qw(encode_utf8 decode_utf8);
 use DateTime;
 use MongoDB;
 use URI;
 use Text::Xslate;
+use String::Truncate ();
 
 {
     my $mdb;
@@ -23,7 +24,15 @@ use self::implicit;
 
 sub render {
     my ($template, $var) = @args;
-    my $tx = Text::Xslate->new(path => ['views'], cache => 1, cache_dir => "/tmp/polywall_xslate_cache");
+    my $tx = Text::Xslate->new(
+        path => ['views'], cache => 1, cache_dir => "/tmp/polywall_xslate_cache",
+        function => {
+            summerize => sub {
+                my ($text) = @_;
+                return encode_utf8( String::Truncate::elide( decode_utf8($text), 280));
+            }
+        }
+    );
 
     $var->{content} = $tx->render($template, $var);
     $self->print( $tx->render("layout.tx", $var) );
