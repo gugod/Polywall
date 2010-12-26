@@ -9,7 +9,7 @@
     <div id="posts">
         : for $posts -> $post {
         <article>
-            <: $post.content | summerize :>
+            <: $post.summerized_content :>
             <a class="permalink" href="/posts/<: $post._id :>" title="<: $post.created_at.strftime('%F %T') :>">written on <time datetime="<: $post.created_at :>">on <: $post.created_at.strftime('%A, %I:%M%P') :></time></a>
         </article>
         : }

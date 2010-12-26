@@ -19,40 +19,29 @@ sub Post()   { __mongodb->posts }
 sub Sticky() { __mongodb->stickies }
 
 sub __xslate {
-    Text::Xslate->new(
-        path => ['views'], cache => 1, cache_dir => "/tmp/polywall_xslate_cache",
-        function => {
-            summerize => sub {
-                my ($text) = @_;
-                return encode_utf8( String::Truncate::elide( decode_utf8($text), 280));
-            }
-        }
-    );
+    Text::Xslate->new(path => ['views'], cache => 1, cache_dir => "/tmp/polywall_xslate_cache");
 }
+
 
 use self::implicit;
 
 sub render {
     my ($template, $var) = @args;
+
     $var->{content} = __xslate->render($template, $var);
-    $self->print( __xslate->render("layout.tx", $var) );
+
+    $self->print( Encode::encode_utf8(__xslate->render("layout.tx", $var) ));
 }
 
 sub show() {
-    my @posts    = Post->find->sort({   created_at => -1 })->limit(25)->all;
+    my @posts    = map {
+        $_->{summerized_content} = String::Truncate::elide( $_->{content}, 280 );
+        $_;
+    } Post->find->sort({   created_at => -1 })->limit(25)->all;
+
     my @stickies = Sticky->find({
         "created_at" => { '$gte' => DateTime->now->subtract(hours => 24) }
     })->sort({ created_at => -1 })->all;
-
-    @posts = map {
-        $_->{content} = encode_utf8($_->{content});
-        $_;
-    } grep { $_->{content} }@posts;
-
-    @stickies = map {
-        $_->{content} = encode_utf8($_->{content});
-        $_;
-    } grep { $_->{content} }@stickies;
 
     render("show.tx", {
         posts => \@posts,
@@ -92,7 +81,6 @@ sub to_create_stickies() {
 sub to_show_post($) {
     my ($post_id) = @args;
     my $post = Post->find_one({ _id => MongoDB::OID->new(value => $post_id) });
-    $post->{content} = encode_utf8($post->{content});
 
     render("posts/show.tx", { post => $post });
 }
