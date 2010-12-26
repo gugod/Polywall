@@ -11,33 +11,25 @@ use URI;
 use Text::Xslate;
 use String::Truncate ();
 
-{
-    my $mdb;
-    sub __mongodb {
-        return $mdb if $mdb;
-        $mdb = MongoDB::Connection->new->polywall;
-    }
-
-    sub Post()   { __mongodb->posts }
-    sub Sticky() { __mongodb->stickies }
+sub __mongodb {
+    MongoDB::Connection->new->polywall;
 }
 
-{
-    my $tx;
-    sub __xslate {
-        my $tx = Text::Xslate->new(
-            path => ['views'], cache => 1, cache_dir => "/tmp/polywall_xslate_cache",
-            function => {
-                summerize => sub {
-                    my ($text) = @_;
-                    return encode_utf8( String::Truncate::elide( decode_utf8($text), 280));
-                }
+sub Post()   { __mongodb->posts }
+sub Sticky() { __mongodb->stickies }
+
+sub __xslate {
+    Text::Xslate->new(
+        path => ['views'], cache => 1, cache_dir => "/tmp/polywall_xslate_cache",
+        function => {
+            summerize => sub {
+                my ($text) = @_;
+                return encode_utf8( String::Truncate::elide( decode_utf8($text), 280));
             }
-        );
-
-        return $tx;
-    }
+        }
+    );
 }
+
 use self::implicit;
 
 sub render {
