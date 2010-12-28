@@ -1296,6 +1296,7 @@ nav {
 }
 /* line 45, ../sass/application.scss */
 #content article {
+  display: block;
   margin-bottom: 1.5em;
   outline-bottom: 1px dotted #ccc;
 }
