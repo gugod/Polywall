@@ -43,9 +43,9 @@ nav {
     margin-top: 75px;
 
     article {
+        display: block;
         margin-bottom: 1.5em;
-        outline-bottom: 1px dotted #ccc;
-
+        outline-bottom: 1px dotted #ccc;        
         .permalink {
             color: #ccc;
 
